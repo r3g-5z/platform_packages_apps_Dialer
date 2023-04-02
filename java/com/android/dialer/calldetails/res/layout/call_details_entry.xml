@@ -61,7 +61,7 @@
       layout="@layout/ec_data_container"
       android:layout_width="match_parent"
       android:layout_height="@dimen/ec_container_height"
-      android:layout_below="@+id/call_time"
+      android:layout_below="@id/call_time"
       android:visibility="gone"/>
 
   <TextView

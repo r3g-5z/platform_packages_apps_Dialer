@@ -16,23 +16,33 @@
 
 package com.android.dialer.calldetails;
 
+import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.calllogutils.CallLogDurations;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
+import com.android.dialer.callrecord.CallRecording;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
@@ -139,6 +149,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
           CallLogDurations.formatDurationAndDataUsageA11y(
               context, entry.getDuration(), entry.getDataUsage()));
     }
+
     setMultimediaDetails(number, entry, showMultimediaDivider);
     if (isRttCall) {
       if (entry.getHasRttTranscript()) {
